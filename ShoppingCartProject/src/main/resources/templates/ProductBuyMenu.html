@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>XYZ Store Product Menu</title>
+</head>
+<body>
+	<h1>Product Menu</h1>
+		<table border="1">
+		<tr>
+			<th>Product ID</th>
+			<th>Name</th>
+			<th>Stock</th>
+			<th>Price</th>
+			<th>Type</th>
+		</tr>
+		<tr th:each="product : ${products}">
+			<td th:text="${product.productId}"></td>
+			<td th:text="${product.productName}"></td>
+			<td th:text="${product.productStock}"></td>
+			<td th:text="${product.productPrice}"></td>
+			<td th:text="${product.productType}"></td>
+		</tr>
+	</table><br><br>
+	<form action="#" th:action="@{./productBought}" th:object="${productBought}" method="post">
+		Product Id : 
+			<select th:field="*{productBoughtId}">
+				<option th:each="product : ${products}" th:value="${product.productId}" th:text="${product.productName}"></option>
+			</select><br><br>
+		Product Quantity : <input type="text" th:field="*{quantity}"><br><br>
+		<input type="submit" value="Buy"><br><br>
+	</form>
+	<form action="./menu">
+		<input type="submit" value="Back"><br><br>
+	</form>
+	<p th:text="${added}" style="color: Green"></p>
+</body>
+</html>

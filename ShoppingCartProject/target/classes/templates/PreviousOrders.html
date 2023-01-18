@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>XYZ Previous Orders</title>
+</head>
+<body>
+	<h1>Previous Orders</h1>
+	<table border="1">
+		<tr>
+			<th>Order ID</th>
+			<th>Product ID</th>
+			<th>Product Name</th>
+			<th>Quantity</th>
+			<th>Price</th>
+		</tr>
+		<tr th:each="productBought: ${productBoughtList}">
+			<!--td: table data  -->
+			<td th:text="${productBought.orderId}"></td>
+			<td th:text="${productBought.productBoughtId}"></td>
+			<td th:text="${products.get(productBought.productBoughtId - 1).productName}"></td>
+			<td th:text="${productBought.quantity}"></td>
+			<td th:text="${'£' + new java.text.DecimalFormat('0.00').format(products.get(productBought.productBoughtId - 1).productPrice * productBought.quantity)}"></td>
+		</tr>
+	</table><br><br>
+	<form action="./menu">
+		<input type="submit" value="Back"><br><br>
+	</form>
+</body>
+</html>
